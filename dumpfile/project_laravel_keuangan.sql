@@ -1,17 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 22, 2020 at 08:36 AM
--- Server version: 5.7.26
--- PHP Version: 7.3.8
+-- Host: 127.0.0.1
+-- Generation Time: May 22, 2023 at 01:10 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Database: `project_keuangan_laravel`
+-- Database: `project_laravel_keuangan`
 --
 
 -- --------------------------------------------------------
@@ -22,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -37,7 +44,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `kategori` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `kategori` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kategori` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -62,7 +69,8 @@ INSERT INTO `kategori` (`id`, `kategori`, `created_at`, `updated_at`) VALUES
 (42, 'Zakat', '2020-04-20 08:30:52', '2020-04-20 08:30:52'),
 (43, 'Tunjangan Karyawan', '2020-04-20 08:31:04', '2020-04-20 08:31:04'),
 (44, 'Penjualan Baju', '2020-04-20 09:54:02', '2020-04-20 09:54:02'),
-(45, 'Biaya hosting', '2020-04-21 05:11:20', '2020-04-21 05:11:20');
+(45, 'Biaya hosting', '2020-04-21 05:11:20', '2020-04-21 05:11:20'),
+(47, 'foya foya', '2023-05-21 18:07:47', '2023-05-21 18:07:47');
 
 -- --------------------------------------------------------
 
@@ -72,7 +80,7 @@ INSERT INTO `kategori` (`id`, `kategori`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -94,8 +102,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -108,10 +116,10 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `transaksi` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `tanggal` date NOT NULL,
-  `jenis` enum('Pemasukan','Pengeluaran') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis` enum('Pemasukan','Pengeluaran') NOT NULL,
   `kategori_id` int(11) NOT NULL,
   `nominal` int(11) NOT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `keterangan` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -146,7 +154,8 @@ INSERT INTO `transaksi` (`id`, `tanggal`, `jenis`, `kategori_id`, `nominal`, `ke
 (49, '2020-04-20', 'Pengeluaran', 36, 500000, 'makan-makan bersama tim programmer dan marketing', '2020-04-20 09:56:17', '2020-04-20 09:56:17'),
 (50, '2020-04-20', 'Pengeluaran', 35, 10000000, 'beli 3 monitor external untuk tim programmer', '2020-04-20 09:57:04', '2020-04-20 09:57:04'),
 (51, '2020-04-21', 'Pemasukan', 40, 5500000, 'Pembuatan aplikasi restauran', '2020-04-21 05:20:06', '2020-04-21 05:20:06'),
-(52, '2020-04-21', 'Pengeluaran', 45, 1200000, 'perpanjang hosting web tahun 2020', '2020-04-21 05:22:05', '2020-04-21 05:22:05');
+(52, '2020-04-21', 'Pengeluaran', 45, 1200000, 'perpanjang hosting web tahun 2020', '2020-04-21 05:22:05', '2020-04-21 05:22:05'),
+(53, '2023-05-20', 'Pemasukan', 47, 1000000, 'makan makan', '2023-05-21 18:08:49', '2023-05-21 18:09:08');
 
 -- --------------------------------------------------------
 
@@ -156,13 +165,13 @@ INSERT INTO `transaksi` (`id`, `tanggal`, `jenis`, `kategori_id`, `nominal`, `ke
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `level` enum('admin','bendahara') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `level` enum('admin','bendahara') NOT NULL,
+  `foto` varchar(50) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -173,7 +182,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level`, `foto`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Ahmad Jhony', 'admin@admin.com', NULL, '$2y$10$GOsnIYShDpcYuIvUFNurv.5yODSZC/9fXGSqPwzKMrkoPHP8BzTDq', 'admin', '1587447052_user1.jpg', NULL, '2020-04-16 22:42:15', '2020-04-21 05:38:06'),
-(6, 'Bani Santoso', 'bani@gmail.com', NULL, '$2y$10$fhRCz6.ayxttFqrnix4aYeDpBtagMcubXiibzQsywvcfkL3RfcZNm', 'bendahara', '1587447285_user3.jpg', NULL, '2020-04-21 05:34:51', '2020-04-21 05:34:51');
+(6, 'Bani Santoso', 'bani@gmail.com', NULL, '$2y$10$fhRCz6.ayxttFqrnix4aYeDpBtagMcubXiibzQsywvcfkL3RfcZNm', 'bendahara', '1587447285_user3.jpg', NULL, '2020-04-21 05:34:51', '2020-04-21 05:34:51'),
+(7, 'aulia', 'aulia@gmail.com', NULL, '$2y$10$HKM1afYIQ7CHvPQ0MtM.y.JKo/YkVVsBdKgZyKMvoTNzXPrePincC', 'admin', '', NULL, '2023-05-21 18:06:28', '2023-05-21 18:06:28'),
+(8, 'rahmat', 'rahmat@gmail.com', NULL, '$2y$10$V.Scsr/jfkrcvreLhURCEOQPIvkNPM02bCexBv6WdVLpC.3Mh8Ue.', 'bendahara', '', NULL, '2023-05-21 18:07:03', '2023-05-21 18:07:03');
 
 --
 -- Indexes for dumped tables
@@ -230,7 +241,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -242,10 +253,15 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

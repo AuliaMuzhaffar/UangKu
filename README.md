@@ -1,4 +1,4 @@
-# SI2PE (Sistem informasi Pengelolaan Penelitian)
+# UangKu (Aplikasi web pencatat keuangan)
 ---
 ## Intoduction
 <br>
@@ -10,10 +10,10 @@
     <p>Jadi dalam projek pengguna akan mencatat keuangan secara online dan mempermudah dalam mencatat keuangan seperti pemasukan dan pengeluaran dikarenakan dapat dikelompokan dalam beberapa kategori sehingga user dapat menganalisa manajemen keuangan mereka.</p>
   
 ## Contibutor
-1. Rahmat Azrima Pelangi (2108107010077)
-2. Aulia Muzhaffar (2108107010033)
+1. Aulia Muzhaffar (2108107010033)
+2. Rahmat Azrima (2108107010077)
 
-# Si2PE
+# Uangku
 
 
 <p> Berikut ini adalah langkah-langkah dalam menjalankan aplikasi ini </p>
